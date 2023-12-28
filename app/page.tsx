@@ -20,7 +20,7 @@ export default function Page() {
         const data = await getNumber(enteredNumber);
         console.log("API Response:", data.text);
         setLoading(false);
-        setApiResponse(data.text);
+        setApiResponse(String(data.text));
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -37,7 +37,7 @@ export default function Page() {
           label="Enter Number"
           variant="faded"
           className="max-w-xs p-4 text-xl"
-          value={enteredNumber}
+          value={String(enteredNumber)}
           onChange={(e) => setEnteredNumber(Number(e.target.value))}
         />
 
@@ -51,7 +51,7 @@ export default function Page() {
       </div>
       {apiResponse && (
         <div className="flex items-center justify-center">
-          <Card className="w-1/3 text-xl bg-transparent border ">
+          <Card className=" md:1/3 text-xl bg-transparent border ">
             <CardBody>
               <p>{apiResponse}</p>
             </CardBody>

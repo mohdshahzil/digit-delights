@@ -5,8 +5,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 interface GetNumberResponse {
   // Define the structure of the response data
   // Adjust this based on the actual response structure from the API
-  someKey: string;
-  anotherKey: number;
+  text : String,
 }
 
 export const getNumber = async (number: number): Promise<GetNumberResponse> => {
