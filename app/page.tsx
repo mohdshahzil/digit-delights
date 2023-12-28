@@ -1,5 +1,6 @@
 import React from "react";
 import Background from "./components/Backgrounnd";
+import {Button} from '@nextui-org/button'; 
 export default function page() {
   return (
     <>
@@ -12,6 +13,7 @@ export default function page() {
           {" "}
           Where Every Number Holds a Tale of its Own.{" "}
         </div>
+        <Button>click me </Button>
       </div>
     </>
   );
