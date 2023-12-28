@@ -1,20 +1,63 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import { getNumber } from "../services/api";
 import Background from "./components/Backgrounnd";
-import {Button} from '@nextui-org/button'; 
-export default function page() {
+import { Button } from "@nextui-org/button";
+import { Input } from "@nextui-org/react";
+import Typography from "./components/Typography";
+import { Card, CardBody } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
+
+export default function Page() {
+  const [enteredNumber, setEnteredNumber] = useState<number | undefined>();
+  const [apiResponse, setApiResponse] = useState<string | undefined>();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleButtonClick = async () => {
+    try {
+      if (enteredNumber !== undefined) {
+        setLoading(true);
+        const data = await getNumber(enteredNumber);
+        console.log("API Response:", data.text);
+        setLoading(false);
+        setApiResponse(data.text);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   return (
     <>
-      <Background></Background>
-      <div className="text-center mt-44 p-4 ">
-        <div className="md:text-7xl  text-6xl   font-extrabold md:p-4 p-3 m-2">
-          From 0 to Infinity
-        </div>
-        <div className="md:text-5xl text-4xl font-bold  md:p-4 p-3 m-2">
-          {" "}
-          Where Every Number Holds a Tale of its Own.{" "}
-        </div>
-        <Button>click me </Button>
+      <Background />
+      <Typography />
+      <div className="flex flex-row items-center justify-center gap-10 p-4">
+        <Input
+          type="number"
+          label="Enter Number"
+          variant="faded"
+          className="max-w-xs p-4 text-xl"
+          value={enteredNumber}
+          onChange={(e) => setEnteredNumber(Number(e.target.value))}
+        />
+
+        <Button
+          size="lg"
+          className="p-4 h-auto bg-black text-white"
+          onClick={handleButtonClick}
+        >
+          {loading ? <Spinner color="default" /> : "Click"}
+        </Button>
       </div>
+      {apiResponse && (
+        <div className="flex items-center justify-center">
+          <Card className="w-1/3 text-xl bg-transparent border ">
+            <CardBody>
+              <p>{apiResponse}</p>
+            </CardBody>
+          </Card>
+        </div>
+      )}
     </>
   );
 }
