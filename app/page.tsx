@@ -58,7 +58,7 @@ export default function Page() {
           </Card>
         </div>
       )}
-      <div className="absolute left-0 right-0 bottom-0 m-8 text-2xl font-semibold flex flex-col items-center justify-between" >Made with ❤️ by MS</div>
+      {/* <div className="absolute left-0 right-0 bottom-0 m-8 text-2xl font-semibold flex flex-col items-center justify-between" >Made with ❤️ by MS</div> */}
     </>
   );
 }
